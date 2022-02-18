@@ -18,6 +18,15 @@ function updateTotal (fieldId, amount){
     totalTag.innerText = newTotal;
     return newTotal;
 };
+
+function getInnerTextValue (fieldId){
+    const fieldTag = document.getElementById(fieldId);
+    const valueInText = fieldTag.innerText;
+    const value = parseFloat (valueInText);
+    return  value;
+}
+
+// update balance 
 function updateBalance (amount, isAdding ){
     const balanceTag = document.getElementById('balance-total');
     const balanceInText = balanceTag.innerText;
@@ -36,13 +45,20 @@ function updateBalance (amount, isAdding ){
 
 document.getElementById('diposit-button').addEventListener('click',function(){
   const amount = getInputValu('diposit-input')
-  updateTotal('diposit-total',amount);
-  updateBalance(amount, true)
+  
+  if(amount >0){
+    updateTotal('diposit-total',amount);
+    updateBalance(amount, true)
+  }
+  
 });
 
-// handel withdraw
+// handel withdraw amount 
 document.getElementById('Withdraw-button').addEventListener('click',function(){
    const amount =  getInputValu('Withdraw-input');
-   updateTotal('withdraw-total',amount);
-   updateBalance(amount, false)
+   const balance = getInnerTextValue('balance-total');
+   if(amount >0 && amount <= balance ){
+    updateTotal('withdraw-total',amount);
+    updateBalance(amount, false)
+   }
 })
