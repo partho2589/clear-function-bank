@@ -67,5 +67,5 @@ document.getElementById('Withdraw-button').addEventListener('click',function(){
     updateTotal('withdraw-total',amount);
     updateBalance(amount, false)
     
-   }return alert('You do not have enough money in your account')
+   }
 })
